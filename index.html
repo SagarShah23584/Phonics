@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CVC Phonics Worksheet - A Sound (ए)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #FFE5E5, #FFF0E5);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            color: #2E86AB;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.2em;
+        }
+
+        .words-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .word-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 3px solid transparent;
+        }
+
+        .word-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-color: #FF6B9D;
+        }
+
+        .word-card:active {
+            transform: scale(0.95);
+        }
+
+        .word-image {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 15px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            border: 2px solid #E0E0E0;
+        }
+
+        .word-title {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #2E86AB;
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+        }
+
+        .word-meaning {
+            color: #666;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .phonetic-display {
+            background: #F0F8FF;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-size: 1.2em;
+            color: #4169E1;
+            border: 2px dashed #4169E1;
+        }
+
+        .instruction {
+            background: #FFF3CD;
+            border: 2px solid #FFEB3B;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.1em;
+            color: #856404;
+        }
+
+        .sound-btn {
+            background: #FF6B9D;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            cursor: pointer;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .sound-btn:hover {
+            background: #E5527A;
+            transform: scale(1.05);
+        }
+
+        .category-header {
+            background: linear-gradient(135deg, #FF6B9D, #4ECDC4);
+            color: white;
+            padding: 15px;
+            margin: 30px 0 20px 0;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔤 CVC Phonics Worksheet</h1>
+            <p>Learn words with 'A' sound (ए) - Click on any word to hear the sounds!</p>
+        </div>
+
+        <div class="instruction">
+            📢 Click on each word card to hear the Hindi phonetic sounds of each letter and the complete word pronunciation!
+        </div>
+
+        <div class="category-header">-AT Words</div>
+        <div class="words-grid" id="at-words"></div>
+
+        <div class="category-header">-AD Words</div>
+        <div class="words-grid" id="ad-words"></div>
+
+        <div class="category-header">-AG Words</div>
+        <div class="words-grid" id="ag-words"></div>
+
+        <div class="category-header">-AN Words</div>
+        <div class="words-grid" id="an-words"></div>
+
+        <div class="category-header">-AP Words</div>
+        <div class="words-grid" id="ap-words"></div>
+
+        <div class="category-header">Other Words</div>
+        <div class="words-grid" id="other-words"></div>
+    </div>
+
+    <script>
+        const wordsData = {
+            'AT': [
+                { word: 'BAT', meaning: 'A wooden stick used in cricket or baseball / चमगादड़', image: '🏏' },
+                { word: 'CAT', meaning: 'A small furry pet animal / बिल्ली', image: '🐱' },
+                { word: 'HAT', meaning: 'Something you wear on your head / टोपी', image: '🎩' },
+                { word: 'MAT', meaning: 'A flat piece of material to wipe feet / चटाई', image: '🪤' },
+                { word: 'RAT', meaning: 'A small rodent animal / चूहा', image: '🐭' },
+                { word: 'SAT', meaning: 'Past tense of sit / बैठा', image: '🪑' },
+                { word: 'VAT', meaning: 'A large container for liquids / बड़ा बर्तन', image: '🛢️' },
+                { word: 'FAT', meaning: 'Having too much weight / मोटा', image: '🐷' }
+            ],
+            'AD': [
+                { word: 'BAD', meaning: 'Not good / बुरा', image: '👎' },
+                { word: 'DAD', meaning: 'Father / पिता', image: '👨' },
+                { word: 'HAD', meaning: 'Past tense of have / था/थी', image: '✋' },
+                { word: 'MAD', meaning: 'Very angry / गुस्सा', image: '😠' },
+                { word: 'PAD', meaning: 'A soft cushion / गद्दी', image: '🛏️' },
+                { word: 'SAD', meaning: 'Feeling unhappy / उदास', image: '😢' }
+            ],
+            'AG': [
+                { word: 'BAG', meaning: 'A container to carry things / बैग', image: '🎒' },
+                { word: 'GAG', meaning: 'A joke or something funny / मजाक', image: '😂' },
+                { word: 'HAG', meaning: 'An old witch-like woman / डायन', image: '🧙‍♀️' },
+                { word: 'LAG', meaning: 'To fall behind / पीछे रहना', image: '🐌' },
+                { word: 'NAG', meaning: 'To complain repeatedly / लगातार शिकायत करना', image: '😤' },
+                { word: 'RAG', meaning: 'A piece of old cloth / पुराना कपड़ा', image: '🧽' },
+                { word: 'SAG', meaning: 'To hang down / लटकना', image: '📉' },
+                { word: 'TAG', meaning: 'A label / लेबल', image: '🏷️' },
+                { word: 'WAG', meaning: 'To move back and forth / हिलाना', image: '🐕' }
+            ],
+            'AN': [
+                { word: 'BAN', meaning: 'To forbid / मना करना', image: '🚫' },
+                { word: 'CAN', meaning: 'A metal container / डिब्बा', image: '🥫' },
+                { word: 'FAN', meaning: 'A device that creates air flow / पंखा', image: '💨' },
+                { word: 'MAN', meaning: 'An adult male person / आदमी', image: '👨' },
+                { word: 'PAN', meaning: 'A cooking utensil / कड़ाही', image: '🍳' },
+                { word: 'RAN', meaning: 'Past tense of run / दौड़ा', image: '🏃' },
+                { word: 'TAN', meaning: 'Brown color from sun / धूप से भूरा', image: '☀️' },
+                { word: 'VAN', meaning: 'A large vehicle / बड़ी गाड़ी', image: '🚐' }
+            ],
+            'AP': [
+                { word: 'CAP', meaning: 'A hat without a brim / टोपी', image: '🧢' },
+                { word: 'GAP', meaning: 'A space between things / खाली जगह', image: '↔️' },
+                { word: 'LAP', meaning: 'The upper part of legs when sitting / गोद', image: '🪑' },
+                { word: 'MAP', meaning: 'A drawing showing places / नक्शा', image: '🗺️' },
+                { word: 'NAP', meaning: 'A short sleep / झपकी', image: '😴' },
+                { word: 'RAP', meaning: 'To knock quickly / तेजी से खटखटाना', image: '👊' },
+                { word: 'SAP', meaning: 'The liquid inside plants / पेड़ का रस', image: '🌳' },
+                { word: 'TAP', meaning: 'To hit lightly / हल्का मारना', image: '👆' },
+                { word: 'ZAP', meaning: 'A sudden electric shock / बिजली का झटका', image: '⚡' }
+            ],
+            'OTHER': [
+                { word: 'GAS', meaning: 'A form of matter like air / गैस', image: '⛽' }
+            ]
+        };
+
+        const hindiPhonetics = {
+            'B': 'ब', 'C': 'क', 'D': 'ड', 'F': 'फ', 'G': 'ग', 'H': 'ह',
+            'L': 'ल', 'M': 'म', 'N': 'न', 'P': 'प', 'R': 'र', 'S': 'स',
+            'T': 'ट', 'V': 'व', 'W': 'व', 'Z': 'ज़', 'A': 'ए'
+        };
+
+        function getFemaleVoice(language) {
+            const voices = speechSynthesis.getVoices();
+            
+            // For Hindi voices - more comprehensive search
+            if (language === 'hi-IN') {
+                // First try to find explicitly female Hindi voices
+                let femaleVoice = voices.find(voice => 
+                    voice.lang.includes('hi') && (
+                        voice.name.toLowerCase().includes('female') ||
+                        voice.name.toLowerCase().includes('woman') ||
+                        voice.name.toLowerCase().includes('kalpana') ||
+                        voice.name.toLowerCase().includes('lekha') ||
+                        voice.name.toLowerCase().includes('priya') ||
+                        voice.name.toLowerCase().includes('shreya') ||
+                        voice.name.toLowerCase().includes('aditi') ||
+                        voice.name.toLowerCase().includes('veena')
+                    )
+                );
+                
+                // If no explicitly female voice found, try Google female voices
+                if (!femaleVoice) {
+                    femaleVoice = voices.find(voice => 
+                        voice.lang.includes('hi') && 
+                        voice.name.toLowerCase().includes('google') &&
+                        !voice.name.toLowerCase().includes('male')
+                    );
+                }
+                
+                // If still no female voice, try any Hindi voice and modify pitch
+                if (!femaleVoice) {
+                    femaleVoice = voices.find(voice => voice.lang.includes('hi'));
+                }
+                
+                return femaleVoice;
+            }
+            
+            // For English voices
+            if (language === 'en-US') {
+                return voices.find(voice => 
+                    voice.lang.includes('en') && (
+                        voice.name.toLowerCase().includes('female') || 
+                        voice.name.toLowerCase().includes('woman') ||
+                        voice.name.toLowerCase().includes('samantha') ||
+                        voice.name.toLowerCase().includes('zira') ||
+                        voice.name.toLowerCase().includes('susan') ||
+                        voice.name.toLowerCase().includes('karen') ||
+                        voice.name.toLowerCase().includes('hazel') ||
+                        voice.name.toLowerCase().includes('moira') ||
+                        voice.name.toLowerCase().includes('tessa') ||
+                        voice.name.toLowerCase().includes('fiona') ||
+                        voice.name.toLowerCase().includes('alice')
+                    )
+                ) || voices.find(voice => 
+                    voice.lang.includes('en') && voice.name.toLowerCase().includes('google') && 
+                    !voice.name.toLowerCase().includes('male')
+                ) || voices.find(voice => voice.lang.includes('en'));
+            }
+        }
+
+        function speakHindiPhonetic(letter) {
+            const phonetic = hindiPhonetics[letter] || letter;
+            const utterance = new SpeechSynthesisUtterance(phonetic);
+            utterance.lang = 'hi-IN';
+            utterance.rate = 0.5;
+            utterance.volume = 1.0;
+            utterance.pitch = 1.4; // Higher pitch to make it sound more feminine
+            
+            const femaleVoice = getFemaleVoice('hi-IN');
+            if (femaleVoice) {
+                utterance.voice = femaleVoice;
+                console.log(`Using Hindi voice: ${femaleVoice.name}`);
+            }
+            
+            speechSynthesis.speak(utterance);
+        }
+
+        function speakWord(word) {
+            setTimeout(() => {
+                const utterance = new SpeechSynthesisUtterance(word);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.7;
+                utterance.volume = 1.0;
+                utterance.pitch = 1.2;
+                
+                const femaleVoice = getFemaleVoice('en-US');
+                if (femaleVoice) utterance.voice = femaleVoice;
+                
+                speechSynthesis.speak(utterance);
+            }, 1000);
+        }
+
+        function speakSequence(word) {
+            const letters = word.split('');
+            letters.forEach((letter, index) => {
+                setTimeout(() => {
+                    speakHindiPhonetic(letter);
+                }, index * 800); // Increased timing for clearer separation
+            });
+            
+            setTimeout(() => {
+                speakWord(word);
+            }, letters.length * 800 + 500); // Adjusted timing
+        }
+
+        function createWordCard(wordData) {
+            const card = document.createElement('div');
+            card.className = 'word-card';
+            card.onclick = () => {
+                ensureVoicesLoaded();
+                speakSequence(wordData.word);
+            };
+            
+            const phoneticLetters = wordData.word.split('').map(letter => hindiPhonetics[letter] || letter).join(' - ');
+            
+            card.innerHTML = `
+                <div class="word-image" style="background: linear-gradient(45deg, #ff9a9e, #fecfef); display: flex; align-items: center; justify-content: center; font-size: 4em;">
+                    ${wordData.image}
+                </div>
+                <div class="word-title">${wordData.word}</div>
+                <div class="word-meaning">${wordData.meaning}</div>
+                <div class="phonetic-display">${phoneticLetters}</div>
+            `;
+            
+            return card;
+        }
+
+        function renderWords() {
+            Object.keys(wordsData).forEach(category => {
+                let containerId;
+                if (category === 'AT') containerId = 'at-words';
+                else if (category === 'AD') containerId = 'ad-words';
+                else if (category === 'AG') containerId = 'ag-words';
+                else if (category === 'AN') containerId = 'an-words';
+                else if (category === 'AP') containerId = 'ap-words';
+                else containerId = 'other-words';
+                
+                const container = document.getElementById(containerId);
+                if (container) {
+                    wordsData[category].forEach(wordData => {
+                        container.appendChild(createWordCard(wordData));
+                    });
+                }
+            });
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', renderWords);
+
+        // Add welcome message
+        window.addEventListener('', () => {
+            // Load voices first
+            speechSynthesis.getVoices();
+            
+            setTimeout(() => {
+                const utterance = new SpeechSynthesisUtterance('Welcome to CVC Phonics! Click on any word to learn!');
+                utterance.lang = 'en-US';
+                utterance.rate = 0.7;
+                utterance.volume = 1.0;
+                utterance.pitch = 1.2;
+                
+                const femaleVoice = getFemaleVoice('en-US');
+                if (femaleVoice) utterance.voice = femaleVoice;
+                
+                speechSynthesis.speak(utterance);
+            }, 1500);
+        });
+
+        // Ensure voices are loaded and force female voice selection
+        speechSynthesis.addEventListener('voiceschanged', () => {
+            console.log('Voices loaded:', speechSynthesis.getVoices().length);
+            const voices = speechSynthesis.getVoices();
+            
+            console.log('Available Hindi voices:');
+            voices.filter(voice => voice.lang.includes('hi')).forEach((voice, index) => {
+                console.log(`${index}: ${voice.name} (${voice.lang}) - ${voice.gender || 'unknown gender'}`);
+            });
+            
+            console.log('Available English voices:');
+            voices.filter(voice => voice.lang.includes('en')).forEach((voice, index) => {
+                if (voice.name.toLowerCase().includes('female') || 
+                    voice.name.toLowerCase().includes('woman') ||
+                    voice.name.toLowerCase().includes('samantha') ||
+                    voice.name.toLowerCase().includes('zira') ||
+                    voice.name.toLowerCase().includes('susan') ||
+                    voice.name.toLowerCase().includes('karen')) {
+                    console.log(`Female voice found: ${voice.name} (${voice.lang})`);
+                }
+            });
+        });
+
+        // Alternative approach: Force female voice selection on first interaction
+        let voicesLoaded = false;
+        function ensureVoicesLoaded() {
+            if (!voicesLoaded) {
+                speechSynthesis.getVoices();
+                voicesLoaded = true;
+                
+                // Try to find and set a default female Hindi voice
+                setTimeout(() => {
+                    const voices = speechSynthesis.getVoices();
+                    const hindiVoices = voices.filter(voice => voice.lang.includes('hi'));
+                    console.log('Hindi voices available:', hindiVoices.map(v => v.name));
+                }, 100);
+            }
+        }
+    </script>
+</body>
+</html>
